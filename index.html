@@ -31,23 +31,19 @@
         </div>
         <div class="modal-body">
           <section class="row-fluid">
-            <div class="form-group">
-              <label for="ProductInput">Product</label> <!-- Product Selection Input-->
-              <input
-                type="text"
-                class="form-control"
-                id="ProductInput"
-                placeholder="Enter Product"
-              />
-            </div>
+              <div class="form-group">
+                  <label for="exampleFormControlSelect1">Select product:</label>
+                  <select class="form-control" id="productSelect"></select>
+                </div>
             <div class="form-group">
               <label for="QuantityInput">Quantity</label> <!--Quantity Selection Input-->
               <input
                 type="number"
                 class="form-control"
                 id="QuantityInput"
-                placeholder="Enter Quantity"
-              />
+                min="1"
+                max="10"
+                value="1"/>
             </div>
           </section>
         </div>
