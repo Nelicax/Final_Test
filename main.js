@@ -1,19 +1,30 @@
 /*This is the list of products available*/
 var data = [   
-    {"name":"BED","price":225.0},
-    {"name":"BENCH","price":29.99},
-    {"name":"CHAIR","price":9.99},
-    {"name":"COUCH","price":50.0},
-    {"name":"PILLOW","price":5.0}
+    {"name": "BED", "price": 225.0},
+    {"name": "BENCH", "price": 29.99},
+    {"name": "CHAIR", "price": 9.99},
+    {"name": "COUCH", "price": 50.0},
+    {"name": "PILLOW", "price": 5.0}
 ]
 
-/*Onject that populates with the Shopping Cart Information*/
+/* that populates with the Shopping Cart Information*/
 
-var Cart = [{"Product":"", "Quantity":""},]
+var Cart = [];
+
+function renderProductSelect(){
+  let select = document.getElementById('productSelect');
+  for (let  [index, product] of data.entries()) {
+    let option = document.createElement('option');
+    option.value = index;
+    option.innerText = product.name;
+    select.append(option);
+  }
+}
 
 /*Function to load the Products Catalog in the Website*/
 
 function loadProductsData() {
+  renderProductSelect();
     var count = 0;
     var dataList1 = document.getElementById("dataList1");
   
@@ -50,11 +61,13 @@ function refreshCart() {
     
 function addNewProduct() {
 
-    var ProductInput = document.getElementById("ProductInput").value;
-    var QuantityInput = document.getElementById("QuantityInput").value;
     
     Cart.push({
-      "Product":ProductInput,"Quantity":QuantityInput,});
+      "product": data[document.getElementById("productSelect").value],
+      "quantity": parseInt(document.getElementById("QuantityInput").value)
+    });
+
+    console.log(Cart);
 
     var i = 0;
     var dataList2 = document.getElementById("dataList2");
@@ -67,11 +80,11 @@ function addNewProduct() {
   
       var Product = document.createElement("div");
       Product.classList.add("col-sm");
-      Product.innerText = Cart[i].Product;
+      Product.innerText = Cart[i].product.name;
   
       var Quantity = document.createElement("div");
       Quantity.classList.add("col-sm");
-      Quantity.innerText = Cart[i].Quantity;
+      Quantity.innerText = Cart[i].quantity;
     
       dataList2.appendChild(listItem);
       listItem.appendChild(Product);
@@ -87,8 +100,13 @@ var OrderTotal = "$1500"; /*This variable will store the Orders Total Amount to 
 /*Function CheckOut was created to calculate the total the customer needs to pay but ran out of time. The time for the test is over =( */
 
 function CheckOut(){
+  let OrderTotal = 0;
+  for (const item of Cart) {
+    OrderTotal += item.product.price * item.quantity;
+  }
+
     var Total = document.getElementById("Total");
-    Total.innerText=OrderTotal;
+    Total.innerText= `$${OrderTotal}`;
 }
 
 
